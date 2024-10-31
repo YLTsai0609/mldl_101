@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "mldl_101"
+version = "0.1.1"
+description = "machine learning and deep learning implementations"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.13"
+numpy = "*"
+pytorch = "*"
+pytest = "*"
+scipy = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.pytest.ini_options]
+doctest_modules = true
+
+[tool.pylint]
+disable = [
+    "C0114",  # 忽略缺少 Module docstring
+    "C0116",  # 忽略缺少函數或方法 docstring
+    "C0115",  # 忽略缺少 Class docstring
+    "W0511",  # 忽略 TODO 和 FIXME 註解
+    "C0103",  # 忽略變數命名風格
+    "W0221",  # 忽略子類別方法覆蓋父類別方法參數不一致
+]
