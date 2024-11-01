@@ -10,23 +10,7 @@ https://github.com/YLTsai0609/DataScience101/blob/master/sa.md?__readwiseLocatio
 import numpy as np
 import scipy.special
 
-
-def softmax(x: "np.ndarray(M, N)") -> "np.ndarray(M, N)":
-    """
-    Softmax normalization for each row, usually used to amplify the difference between the componenets.
-    >>> x = np.array([1, 2, 3])
-    >>> softmax(x)
-    array([[0.09003057, 0.24472847, 0.66524096]])
-
-    >>> x = np.array([[1, 2, 3], [1,2,5]])
-    >>> softmax(x)
-    array([[0.09003057, 0.24472847, 0.66524096],
-           [0.01714783, 0.04661262, 0.93623955]])
-    """
-
-    # NOTE: num.sum(axis=-1), sum at the last axis
-    return np.exp(x) / np.sum(np.exp(x), axis=-1).reshape(-1, 1)
-
+from utils import softmax
 
 # n_samples (n_token) = 3, (in nlp problem, would be the sequence length)
 # n_input_feature = 4
@@ -66,3 +50,4 @@ A2 = scipy.special.softmax(q @ k.T / d, axis=1)
 O = A @ v  # (n_samples, n_samples) dot (n_samples, n_hidden) = (n_samples, n_hidden)
 
 # attention matrix (n_samples, n_samples) and softmax normalization is the bottleneck of computation
+# Attenion is 3 dot transform --> input with (wq, wk, wv) --> (q,k,v) --> attention matrix --> output
