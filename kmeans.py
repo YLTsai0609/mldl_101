@@ -42,6 +42,8 @@ def predict(new_samples : "np.ndarray(n_samples, n_input_features)", centroids :
     generate predictions for new samples
     time complexity: O(n_clusters * n_samples)
     if non-clustered samples, time complexity: O(n_samples ** 2), where n_clusters << n_samples
+    
+    we could also perform soft prediction if we need
     """
     distances_per_cluster = []
     for c in range(num_clusters):
