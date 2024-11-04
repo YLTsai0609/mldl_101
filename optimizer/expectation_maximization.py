@@ -1,4 +1,5 @@
 '''
+Recap KMeans
 for i in range(max_iter):
     # E-step (Expectation): 計算每個點屬於各個類別的機率（在 K-means 中是硬分配）
     distances = np.zeros((num_clusters, inputs.shape[0]))
@@ -9,6 +10,9 @@ for i in range(max_iter):
     # M-step (Maximization): 更新模型參數（在 K-means 中是更新中心點）
     for c in range(num_clusters):
         centroids[c] = inputs[cluster_assignments == c].mean(axis=0)
+
+A brief introduction to EM algorithm
+https://zh.wikipedia.org/zh-tw/%E6%9C%80%E5%A4%A7%E6%9C%9F%E6%9C%9B%E7%AE%97%E6%B3%95
 '''
 import numpy as np
 from numpy import linalg as LA
