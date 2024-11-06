@@ -49,7 +49,7 @@ class KMeans(EMAlgorithm):
         self.cluster_assignments = None # (n_samples,)
         self.loss = []    
 
-    def e_step(self, data : "np.ndarray(n_samples, n_features)"):
+    def e_step(self, data : "np.ndarray(n_samples, n_features)") -> "np.ndarray(n_samples,)":
         """實現 K-means 的分配步驟"""
         distances = np.zeros((self.n_clusters, data.shape[0])) # (n_clusters, n_samples)
         for c in range(self.n_clusters):
@@ -57,22 +57,23 @@ class KMeans(EMAlgorithm):
         self.loss.append(self.compute_loss(distances))
         return np.argmin(distances, axis=0)
     
-    def m_step(self, data : "np.ndarray(n_samples, n_features)"):
+    def m_step(self, data : "np.ndarray(n_samples, n_features)") -> None:
         """實現 K-means 的中心點更新"""
         for c in range(self.n_clusters):
             self.new_centroids[c] = data[self.latent_variables == c].mean(axis=0)
     
-    def compute_loss(self, distances : "np.ndarray(n_clusters, n_samples)"):
+    def compute_loss(self, distances : "np.ndarray(n_clusters, n_samples)") -> float:
         '''
         replace this if need other loss function
         '''
         return np.sum(distances ** 2)
     
-    def fit(self, data, max_iter=100):
+    def fit(self, data, max_iter=100) -> "KMeans":
         for i in range(max_iter):
             self.cluster_assignments = self.e_step(data) # (n_samples,)
             self.m_step(data)
             self.loss.append(self.compute_loss(data))
+        return self
 
-    def predict(self, data : "np.ndarray(n_samples, n_features)"):
+    def predict(self, data : "np.ndarray(n_samples, n_features)") -> "np.ndarray(n_samples,)":
         return self.e_step(data)
